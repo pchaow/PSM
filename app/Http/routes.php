@@ -11,10 +11,11 @@
 |
 */
 
+//web apps.
+
 Route::get('/', function () {
     $suppliers = \App\Models\Supplier::all();
-    return view('supplier')
-        ->with('suppliers', $suppliers);
+    return view('menu');
 });
 
 Route::get('/product', function () {
@@ -59,6 +60,9 @@ Route::post('/supplier', function (\Illuminate\Http\Request $request) {
     return redirect('/supplier');
 });
 
+
+// api and webservice.
+
 Route::get('/api/supplier', function () {
     return \App\Models\Supplier::all();
 });
@@ -68,7 +72,11 @@ Route::post('/api/supplier', function (\Illuminate\Http\Request $request) {
 });
 
 Route::get('/api/product', function () {
-    return \App\Models\Product::with(['value','value.supplier'])->get();
+    return \App\Models\Product::with(['values', 'values.supplier'])->get();
+});
+
+Route::get('/api/product/{id}', function ($id) {
+    return \App\Models\Product::with(['values', 'values.supplier'])->find($id);
 });
 
 Route::post('/api/product', function (\Illuminate\Http\Request $request) {
