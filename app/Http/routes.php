@@ -62,6 +62,8 @@ Route::post('/supplier', function (\Illuminate\Http\Request $request) {
 
 
 // api and webservice.
+header('Access-Control-Allow-Origin', '*');
+header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
 Route::get('/api/supplier', function () {
     return \App\Models\Supplier::all();
